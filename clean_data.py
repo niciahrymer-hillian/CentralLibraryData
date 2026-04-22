@@ -16,6 +16,11 @@ from datetime import date, datetime
 from pathlib import Path
 from typing import Iterable
 
+try:
+    from validate_sample import validate as _validate_sample
+except ImportError:  # validate_sample not on path; validation silently skipped
+    _validate_sample = None  # type: ignore[assignment]
+
 
 SUPPORTED_EXTENSIONS = {".csv", ".json", ".ndjson"}
 
@@ -341,6 +346,12 @@ def main() -> int:
     parser.add_argument("--in-place", action="store_true", help="Overwrite original files.")
     parser.add_argument("--trim-fields", action="store_true", help="Trim leading/trailing spaces from CSV fields.")
     parser.add_argument("--dry-run", action="store_true", help="Report files that would change without writing output.")
+    parser.add_argument(
+        "--validate-sample",
+        nargs=2,
+        metavar=("TITLES_CSV", "ISSUES_CSV"),
+        help="After cleaning, validate a golden sample pair against business rules.",
+    )
     args = parser.parse_args()
 
     root = args.root.resolve()
@@ -380,7 +391,22 @@ def main() -> int:
     print(f"null rows removed: {total_nulls}")
     print(f"failed: {failures}")
 
-    return 1 if failures else 0
+    sample_failures = 0
+    if args.validate_sample:
+        titles_path, issues_path = (Path(p) for p in args.validate_sample)
+        if _validate_sample is None:
+            print("WARNING: validate_sample module not found; skipping business-rule validation.")
+        else:
+            violations = _validate_sample(titles_path, issues_path)
+            if violations:
+                sample_failures = len(violations)
+                print(f"\nSample validation FAILED — {sample_failures} violation(s):")
+                for v in violations:
+                    print(f"  {v}")
+            else:
+                print("\nSample validation OK — all business rules satisfied.")
+
+    return 1 if (failures or sample_failures) else 0
 
 
 if __name__ == "__main__":
