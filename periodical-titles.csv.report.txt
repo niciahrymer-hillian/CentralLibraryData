@@ -1,0 +1,83 @@
+
+=== PROFILE: /Users/nicky/Projects/CentralLibraryData/periodical-titles.csv ===
+rows: 908
+columns: 15
+column names and dtypes:
+id                   str
+title                str
+description          str
+publisher            str
+trove_url            str
+download_text        str
+issue_count        int64
+start_date           str
+end_date             str
+start_year       float64
+end_year         float64
+extent               str
+place                str
+issn                 str
+catalogue_url        str
+
+first 5 rows:
+                id                                                           title description             publisher                             trove_url                                                                                                                    download_text  issue_count start_date   end_date  start_year  end_year                             extent     place issn                        catalogue_url
+   nla.obj-8423556 "Coo-ee!" : the journal of the Bishops Knoll Hospital, Bristol.         NaN Partridge & Love Ltd.    https://nla.gov.au/nla.obj-8423556    https://trove-journals.s3.ap-southeast-2.amazonaws.com/coo-ee-the-journal-of-the-bishops-knoll-hospital-b-nla.obj-8423556.zip           13 1916-01-01 1917-10-20      1916.0    1917.0               1 v. ; ill. ; 25 cm.       NaN  NaN  https://nla.gov.au/nla.cat-vn377167
+nla.obj-2998991958    (Ross's) Hobart Town almanack, and Van Diemen's Land annual.         NaN Printed by James Ross https://nla.gov.au/nla.obj-2998991958 https://trove-journals.s3.ap-southeast-2.amazonaws.com/ross-s-hobart-town-almanack-and-van-diemen-s-land--nla.obj-2998991958.zip            1 1835-01-01 1835-01-01      1835.0    1835.0 2 volumes : illustrations ; 18 cm.  Tasmania  NaN  https://nla.gov.au/nla.cat-vn610781
+nla.obj-2998997061     (Ross's) Van Diemen's Land annual and Hobart Town almanack.         NaN Printed by James Ross https://nla.gov.au/nla.obj-2998997061 https://trove-journals.s3.ap-southeast-2.amazonaws.com/ross-s-van-diemen-s-land-annual-and-hobart-town-al-nla.obj-2998997061.zip            1 1834-01-01 1934-01-01      1934.0    1934.0 1 volumes : illustrations ; 18 cm.  Tasmania  NaN https://nla.gov.au/nla.cat-vn2133206
+  nla.obj-15956697                                          14th Company magazine.         NaN         14th Company.   https://nla.gov.au/nla.obj-15956697                                https://trove-journals.s3.ap-southeast-2.amazonaws.com/14th-company-magazine-nla.obj-15956697.zip            1 0191-01-01 1918-06-14      1918.0    1918.0                        v. ; 25 cm. Australia  NaN  https://nla.gov.au/nla.cat-vn585007
+ nla.obj-250818955                     20 favourite & war-time camp songs [music].         NaN        Sterling Music  https://nla.gov.au/nla.obj-250818955              https://trove-journals.s3.ap-southeast-2.amazonaws.com/20-favourite-war-time-camp-songs-music-nla.obj-250818955.zip            7 1940-01-01        NaN         NaN       NaN             7 v. of music ; 29 cm.       NaN  NaN https://nla.gov.au/nla.cat-vn2926496
+
+null report (sorted):
+               null_count   null_pct
+description           891  98.127753
+issn                  801  88.215859
+place                 294  32.378855
+end_date              196  21.585903
+start_year            173  19.052863
+end_year              173  19.052863
+download_text         109  12.004405
+extent                 22   2.422907
+publisher              12   1.321586
+start_date              9   0.991189
+trove_url               5   0.550661
+catalogue_url           1   0.110132
+id                      0   0.000000
+title                   0   0.000000
+issue_count             0   0.000000
+
+exact duplicate rows: 0
+
+numeric column stats:
+non-numeric values in download_text: 799
+                                                                                                                       download_text
+0      https://trove-journals.s3.ap-southeast-2.amazonaws.com/coo-ee-the-journal-of-the-bishops-knoll-hospital-b-nla.obj-8423556.zip
+1   https://trove-journals.s3.ap-southeast-2.amazonaws.com/ross-s-hobart-town-almanack-and-van-diemen-s-land--nla.obj-2998991958.zip
+2   https://trove-journals.s3.ap-southeast-2.amazonaws.com/ross-s-van-diemen-s-land-annual-and-hobart-town-al-nla.obj-2998997061.zip
+3                                  https://trove-journals.s3.ap-southeast-2.amazonaws.com/14th-company-magazine-nla.obj-15956697.zip
+4                https://trove-journals.s3.ap-southeast-2.amazonaws.com/20-favourite-war-time-camp-songs-music-nla.obj-250818955.zip
+5                                 https://trove-journals.s3.ap-southeast-2.amazonaws.com/24th-battalion-journal-nla.obj-24207812.zip
+6                                              https://trove-journals.s3.ap-southeast-2.amazonaws.com/a-careta-nla.obj-320275568.zip
+8   https://trove-journals.s3.ap-southeast-2.amazonaws.com/a-short-report-on-the-evidence-in-the-case-of-regi-nla.obj-3089884707.zip
+9   https://trove-journals.s3.ap-southeast-2.amazonaws.com/a-h-massina-co-s-weather-almanac-and-general-guide-nla.obj-2905264494.zip
+10  https://trove-journals.s3.ap-southeast-2.amazonaws.com/a-h-massina-co-s-weather-almanac-for-with-wall-cal-nla.obj-3086457649.zip
+11                                           https://trove-journals.s3.ap-southeast-2.amazonaws.com/abc-weekly-nla.obj-890736639.zip
+12                               https://trove-journals.s3.ap-southeast-2.amazonaws.com/anare-reports-series-b-nla.obj-254636277.zip
+13                                      https://trove-journals.s3.ap-southeast-2.amazonaws.com/anzhes-journal-nla.obj-2836256024.zip
+14   https://trove-journals.s3.ap-southeast-2.amazonaws.com/abstract-of-the-report-of-the-london-missionary-so-nla.obj-288413164.zip
+16       https://trove-journals.s3.ap-southeast-2.amazonaws.com/action-front-journal-of-the-2-2-field-regiment-nla.obj-321169907.zip
+17                                           https://trove-journals.s3.ap-southeast-2.amazonaws.com/activities-nla.obj-806514451.zip
+18                        https://trove-journals.s3.ap-southeast-2.amazonaws.com/acts-of-parliament-of-victoria-nla.obj-54185597.zip
+19    https://trove-journals.s3.ap-southeast-2.amazonaws.com/acts-of-the-parliament-passed-in-the-first-year-of-nla.obj-54127737.zip
+20             https://trove-journals.s3.ap-southeast-2.amazonaws.com/acts-of-the-parliament-of-south-australia-nla.obj-53890906.zip
+21                      https://trove-journals.s3.ap-southeast-2.amazonaws.com/acts-of-the-victorian-parliament-nla.obj-55252550.zip
+issue_count: min=0 max=5418 mean=41.02092511013216
+start_year: min=196.0 max=2007.0 mean=1906.9795918367347
+end_year: min=1819.0 max=2022.0 mean=1919.7034013605441
+
+date parsing checks:
+unparseable dates in start_date: 0
+unparseable dates in end_date: 0
+unparseable dates in start_year: 0
+unparseable dates in end_year: 0
+CLEANED: /Users/nicky/Projects/CentralLibraryData/periodical-titles.csv -> /Users/nicky/Projects/CentralLibraryData/cleaned_data/periodical-titles.csv (dupes=0, nulls=0)
+validation passed: periodical-titles.csv

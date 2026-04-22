@@ -1,0 +1,8 @@
+CLEANED: /Users/nicky/Projects/CentralLibraryData/titles-issues-added.ndjson -> /Users/nicky/Projects/CentralLibraryData/cleaned_data/titles-issues-added.ndjson (dupes=0, nulls=0)
+
+=== REPORT: /Users/nicky/Projects/CentralLibraryData/titles-issues-added.ndjson ===
+file type: .ndjson
+status: changed
+output: /Users/nicky/Projects/CentralLibraryData/cleaned_data/titles-issues-added.ndjson
+duplicates removed: 0
+null rows removed: 0

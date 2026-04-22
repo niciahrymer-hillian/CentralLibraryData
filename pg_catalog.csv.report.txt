@@ -1,0 +1,41 @@
+
+=== PROFILE: /Users/nicky/Projects/CentralLibraryData/pg_catalog.csv ===
+rows: 76135
+columns: 9
+column names and dtypes:
+Text#          int64
+Type             str
+Issued           str
+Title            str
+Language         str
+Authors          str
+Subjects         str
+LoCC             str
+Bookshelves      str
+
+first 5 rows:
+ Text# Type     Issued                                                                                                         Title Language                                       Authors                                                                                                                                                 Subjects     LoCC                                                                                                                                           Bookshelves
+     1 Text 1971-12-01                                               The Declaration of Independence of the United States of America       en                  Jefferson, Thomas, 1743-1826                                                 United States -- History -- Revolution, 1775-1783 -- Sources; United States. Declaration of Independence E201; JK                Politics; American Revolutionary War; United States Law; Browsing: History - American; Browsing: History - Warfare; Browsing: Politics
+     2 Text 1972-12-01      The United States Bill of Rights\r\nThe Ten Original Amendments to the Constitution of the United States       en                                 United States                                                               Civil rights -- United States -- Sources; United States. Constitution. 1st-10th Amendments   JK; KF                Politics; American Revolutionary War; United States Law; Browsing: History - American; Browsing: Law & Criminology; Browsing: Politics
+     3 Text 1973-11-01                                                                           John F. Kennedy's Inaugural Address       en Kennedy, John F. (John Fitzgerald), 1917-1963                                                      United States -- Foreign relations -- 1961-1963; Presidents -- United States -- Inaugural addresses     E838                                                                                                      Browsing: History - American; Browsing: Politics
+     4 Text 1973-11-01 Lincoln's Gettysburg Address\r\nGiven November 19, 1863 on the battlefield near Gettysburg, Pennsylvania, USA       en                   Lincoln, Abraham, 1809-1865 Consecration of cemeteries -- Pennsylvania -- Gettysburg; Soldiers' National Cemetery (Gettysburg, Pa.); Lincoln, Abraham, 1809-1865. Gettysburg address     E456                                                                                        US Civil War; Browsing: History - American; Browsing: Politics
+     5 Text 1975-12-01                                                                                The United States Constitution       en                                 United States                                                            United States -- Politics and government -- 1783-1789 -- Sources; United States. Constitution   JK; KF United States; Politics; American Revolutionary War; United States Law; Browsing: History - American; Browsing: Law & Criminology; Browsing: Politics
+
+null report (sorted):
+             null_count  null_pct
+LoCC                276  0.362514
+Bookshelves         273  0.358574
+Authors             165  0.216720
+Subjects             69  0.090628
+Text#                 0  0.000000
+Type                  0  0.000000
+Issued                0  0.000000
+Title                 0  0.000000
+Language              0  0.000000
+
+exact duplicate rows: 0
+
+numeric column stats:
+Text#: min=1 max=76314 mean=38146.252761542
+CLEANED: /Users/nicky/Projects/CentralLibraryData/pg_catalog.csv -> /Users/nicky/Projects/CentralLibraryData/cleaned_data/pg_catalog.csv (dupes=5, nulls=0)
+validation passed: pg_catalog.csv
