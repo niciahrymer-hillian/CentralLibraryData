@@ -1,0 +1,1 @@
+CHUNK: ratings.csv  rows_in_chunk=200000  dupes=0  nulls=0  [offset=5034555]

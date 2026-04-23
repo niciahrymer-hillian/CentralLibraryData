@@ -1,0 +1,18 @@
+
+Data inventory
+file,type,size_bytes
+/Users/nicky/Projects/CentralLibraryData/credits.csv,.csv,189917659
+/Users/nicky/Projects/CentralLibraryData/keywords.csv,.csv,6231943
+/Users/nicky/Projects/CentralLibraryData/links.csv,.csv,989107
+/Users/nicky/Projects/CentralLibraryData/links_small.csv,.csv,183372
+/Users/nicky/Projects/CentralLibraryData/metadata.json,.json,548
+/Users/nicky/Projects/CentralLibraryData/periodical-issues-schema.json,.json,985
+/Users/nicky/Projects/CentralLibraryData/periodical-issues.csv,.csv,9221860
+/Users/nicky/Projects/CentralLibraryData/periodical-titles-schema.json,.json,1837
+/Users/nicky/Projects/CentralLibraryData/periodical-titles.csv,.csv,295509
+/Users/nicky/Projects/CentralLibraryData/pg_catalog.csv,.csv,20608513
+/Users/nicky/Projects/CentralLibraryData/ratings.csv,.csv,709550327
+/Users/nicky/Projects/CentralLibraryData/ratings_small.csv,.csv,2438266
+/Users/nicky/Projects/CentralLibraryData/ro-crate-metadata.json,.json,16664
+/Users/nicky/Projects/CentralLibraryData/tcc_ceds_music.csv,.csv,27655251
+/Users/nicky/Projects/CentralLibraryData/titles-issues-added.ndjson,.ndjson,4030430

@@ -1,0 +1,8 @@
+CLEANED: /Users/nicky/Projects/CentralLibraryData/metadata.json -> /Users/nicky/Projects/CentralLibraryData/cleaned_data/metadata.json (dupes=0, nulls=0)
+
+=== REPORT: /Users/nicky/Projects/CentralLibraryData/metadata.json ===
+file type: .json
+status: changed
+output: /Users/nicky/Projects/CentralLibraryData/cleaned_data/metadata.json
+duplicates removed: 0
+null rows removed: 0

@@ -1,0 +1,85 @@
+
+=== PROFILE: /Users/nicky/Projects/CentralLibraryData/tcc_ceds_music.csv ===
+rows: 28372
+columns: 31
+column names and dtypes:
+Unnamed: 0                    int64
+artist_name                     str
+track_name                      str
+release_date                  int64
+genre                           str
+lyrics                          str
+len                           int64
+dating                      float64
+violence                    float64
+world/life                  float64
+night/time                  float64
+shake the audience          float64
+family/gospel               float64
+romantic                    float64
+communication               float64
+obscene                     float64
+music                       float64
+movement/places             float64
+light/visual perceptions    float64
+family/spiritual            float64
+like/girls                  float64
+sadness                     float64
+feelings                    float64
+danceability                float64
+loudness                    float64
+acousticness                float64
+instrumentalness            float64
+valence                     float64
+energy                      float64
+topic                           str
+age                         float64
+
+first 5 rows:
+ Unnamed: 0          artist_name           track_name  release_date genre                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     lyrics  len   dating  violence  world/life  night/time  shake the audience  family/gospel  romantic  communication  obscene    music  movement/places  light/visual perceptions  family/spiritual  like/girls  sadness  feelings  danceability  loudness  acousticness  instrumentalness  valence   energy      topic  age
+          0               mukesh mohabbat bhi jhoothi          1950   pop hold time feel break feel untrue convince speak voice tear try hold hurt try forgive okay play break string feel heart want feel tell real truth hurt lie worse anymore little turn dust play house ruin run leave save like chase train late late tear try hold hurt try forgive okay play break string feel heart want feel tell real truth hurt lie worse anymore little run leave save like chase train know late late play break string feel heart want feel tell real truth hurt lie worse anymore little know little hold time feel   95 0.000598  0.063746    0.000598    0.000598            0.000598       0.048857  0.017104       0.263751 0.000598 0.039288         0.000598                  0.000598          0.000598    0.000598 0.380299  0.117175      0.357739  0.454119      0.997992          0.901822 0.339448 0.137110    sadness  1.0
+          4        frankie laine            i believe          1950   pop                                                                                                                                                                                                               believe drop rain fall grow believe darkest night candle glow believe go astray come believe believe believe smallest prayer hear believe great hear word time hear bear baby touch leaf believe believe believe lord heaven guide sin hide believe calvary die pierce believe death rise meet heaven loud amen know believe   51 0.035537  0.096777    0.443435    0.001284            0.001284       0.027007  0.001284       0.001284 0.001284 0.118034         0.001284                  0.212681          0.051124    0.001284 0.001284  0.001284      0.331745  0.647540      0.954819          0.000002 0.325021 0.263240 world/life  1.0
+          6          johnnie ray                  cry          1950   pop                                                                                                                                                                                                                                                                                                                                                                                  sweetheart send letter goodbye secret feel better wake dream think real false emotions feel heartaches hang long blue get bluer song remember cloudy hair   24 0.002770  0.002770    0.002770    0.002770            0.002770       0.002770  0.158564       0.250668 0.002770 0.323794         0.002770                  0.002770          0.002770    0.002770 0.002770  0.225422      0.456298  0.585288      0.840361          0.000000 0.351814 0.139112      music  1.0
+         10          pérez prado             patricia          1950   pop                                                                                                                                                                                                                 kiss lips want stroll charm mambo chacha meringue heaven arm japan brag geisha care long uncle eye starry sort gleam like million dollar dream come true everybody wish steal heart away guess try eye starry sort gleam like million dollar dream come true kiss lips want stroll charm japan brag geisha care long uncle   54 0.048249  0.001548    0.001548    0.001548            0.021500       0.001548  0.411536       0.001548 0.001548 0.001548         0.129250                  0.001548          0.001548    0.081132 0.225889  0.001548      0.686992  0.744404      0.083935          0.199393 0.775350 0.743736   romantic  1.0
+         12 giorgos papadopoulos   apopse eida oneiro          1950   pop                                                                                                                                                                                                                                                          till darling till matter know till dream live apart know hearts till world free oceans cross mountains climb know gain loss pray loss time till dream till memory till hold till oceans cross mountains climb know gain loss pray loss time till dream till memory till hold till   48 0.001350  0.001350    0.417772    0.001350            0.001350       0.001350  0.463430       0.001350 0.001350 0.001350         0.001350                  0.001350          0.029755    0.001350 0.068800  0.001350      0.291671  0.646489      0.975904          0.000246 0.597073 0.394375   romantic  1.0
+
+null report (sorted):
+                          null_count  null_pct
+Unnamed: 0                         0       0.0
+artist_name                        0       0.0
+track_name                         0       0.0
+release_date                       0       0.0
+genre                              0       0.0
+lyrics                             0       0.0
+len                                0       0.0
+dating                             0       0.0
+violence                           0       0.0
+world/life                         0       0.0
+night/time                         0       0.0
+shake the audience                 0       0.0
+family/gospel                      0       0.0
+romantic                           0       0.0
+communication                      0       0.0
+obscene                            0       0.0
+music                              0       0.0
+movement/places                    0       0.0
+light/visual perceptions           0       0.0
+family/spiritual                   0       0.0
+like/girls                         0       0.0
+sadness                            0       0.0
+feelings                           0       0.0
+danceability                       0       0.0
+loudness                           0       0.0
+acousticness                       0       0.0
+instrumentalness                   0       0.0
+valence                            0       0.0
+energy                             0       0.0
+topic                              0       0.0
+age                                0       0.0
+
+exact duplicate rows: 0
+
+date parsing checks:
+unparseable dates in release_date: 0
+CLEANED: /Users/nicky/Projects/CentralLibraryData/tcc_ceds_music.csv -> /Users/nicky/Projects/CentralLibraryData/cleaned_data/tcc_ceds_music.csv (dupes=0, nulls=0)
+validation passed: tcc_ceds_music.csv
