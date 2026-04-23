@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Clean CSV, JSON, and NDJSON files in a directory tree.
 
 By default, cleaned files are written to ./cleaned_data to avoid modifying
@@ -13,6 +14,12 @@ import json
 import re
 from datetime import date, datetime
 from pathlib import Path
+from typing import Iterable
+
+try:
+    from validate_sample import validate as _validate_sample
+except ImportError:  # validate_sample not on path; validation silently skipped
+    _validate_sample = None  # type: ignore[assignment]
 from typing import Iterable, TextIO
 
 import pandas as pd
@@ -21,6 +28,7 @@ import pandas as pd
 SUPPORTED_EXTENSIONS = {".csv", ".json", ".ndjson"}
 
 # Directories to skip entirely during scanning
+SKIP_DIRS = {".venv", "venv", ".git", "__pycache__", "node_modules", ".tox", "cleaned_data"}
 SKIP_DIRS = {".venv", "venv", ".git", "__pycache__", "node_modules", ".tox", "cleaned_data", "sample_data_java"}
 
 # Optional size guard for very large files. Disabled by default.
@@ -537,6 +545,7 @@ def clean_file(path: Path, trim_fields: bool) -> tuple[str, int, int]:
 
 def write_output(cleaned: str, source: Path, root: Path, output_dir: Path | None, in_place: bool) -> Path:
     if in_place:
+        source.write_text(cleaned, encoding="utf-8", newline="")
         with source.open("w", encoding="utf-8", newline="") as f:
             f.write(cleaned)
         return source
@@ -544,6 +553,7 @@ def write_output(cleaned: str, source: Path, root: Path, output_dir: Path | None
     assert output_dir is not None
     target = output_dir / source.relative_to(root)
     target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(cleaned, encoding="utf-8", newline="")
     with target.open("w", encoding="utf-8", newline="") as f:
         f.write(cleaned)
     return target
@@ -563,6 +573,11 @@ def main() -> int:
     parser.add_argument("--in-place", action="store_true", help="Overwrite original files.")
     parser.add_argument("--trim-fields", action="store_true", help="Trim leading/trailing spaces from CSV fields.")
     parser.add_argument("--dry-run", action="store_true", help="Report files that would change without writing output.")
+    parser.add_argument(
+        "--validate-sample",
+        nargs=2,
+        metavar=("TITLES_CSV", "ISSUES_CSV"),
+        help="After cleaning, validate a golden sample pair against business rules.",
     parser.add_argument("--inventory", action="store_true", help="Print file name, type, and size inventory.")
     parser.add_argument("--profile-csv", action="store_true", help="Print CSV shape, dtypes, null, duplicate, and type checks.")
     parser.add_argument("--validate-csv", action="store_true", help="Run post-clean CSV validation checks.")
@@ -609,6 +624,25 @@ def main() -> int:
     failures = 0
     total_duplicates = 0
     total_nulls = 0
+
+    for path in sorted(iter_data_files(root)):
+        try:
+            cleaned, dupes, nulls = clean_file(path, trim_fields=args.trim_fields)
+            original = path.read_text(encoding="utf-8-sig")
+            if cleaned == original and dupes == 0 and nulls == 0:
+                unchanged += 1
+                continue
+            changed += 1
+            total_duplicates += dupes
+            total_nulls += nulls
+            if args.dry_run:
+                print(f"WOULD CLEAN: {path} (dupes={dupes}, nulls={nulls})")
+                continue
+            target = write_output(cleaned, path, root, output_dir, args.in_place)
+            print(f"CLEANED: {path} -> {target} (dupes={dupes}, nulls={nulls})")
+        except Exception as exc:  # pragma: no cover - defensive path for malformed files
+            failures += 1
+            print(f"FAILED: {path} ({exc})")
     interrupted = False
     per_file_summary: list[tuple[str, str, str, int | None, int | None]] = []
     max_file_bytes = None if args.max_file_mb is None else args.max_file_mb * 1024 * 1024
@@ -686,6 +720,27 @@ def main() -> int:
     print(f"duplicates removed: {total_duplicates}")
     print(f"null rows removed: {total_nulls}")
     print(f"failed: {failures}")
+
+    sample_failures = 0
+    if args.validate_sample:
+        titles_path, issues_path = (Path(p) for p in args.validate_sample)
+        if _validate_sample is None:
+            print("WARNING: validate_sample module not found; skipping business-rule validation.")
+        else:
+            violations = _validate_sample(titles_path, issues_path)
+            if violations:
+                sample_failures = len(violations)
+                print(f"\nSample validation FAILED — {sample_failures} violation(s):")
+                for v in violations:
+                    print(f"  {v}")
+            else:
+                print("\nSample validation OK — all business rules satisfied.")
+
+    return 1 if (failures or sample_failures) else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
     print(f"interrupted: {interrupted}")
 
     if per_file_summary:

@@ -57,6 +57,86 @@ def check_schema(file_path):
         schema.to_json(schema_name)
     return schema_name
 
+def find_crate_root() -> Path:
+    """Find the nearest directory containing ro-crate-metadata.json."""
+    script_dir = Path(__file__).resolve().parent
+    for candidate in (script_dir, script_dir.parent, Path.cwd()):
+        if (candidate / "ro-crate-metadata.json").exists():
+            return candidate
+    raise FileNotFoundError("Could not find ro-crate-metadata.json")
+
+def main(version):
+    crate_root = find_crate_root()
+    crate = ROCrate(str(crate_root))
+    repo_url = crate.get("./").properties()["url"]
+    original_cwd = Path.cwd()
+
+    # Use crate root so relative file paths in metadata resolve correctly.
+    try:
+        os.chdir(crate_root)
+        for datafile in crate.get_by_type("Dataset"):
+            # Ignore root object and external resources
+            if datafile.id != "./" and not datafile.id.startswith("http"):
+                data_props = datafile.properties()
+                file_path = Path(data_props["name"])
+                print(data_props)
+                # Update file stats
+                stats = file_path.stat()
+                date_modified = datetime.datetime.fromtimestamp(stats.st_mtime).strftime("%Y-%m-%d")
+                if file_path.is_dir():
+                    size = len(list(file_path.glob("*")))
+                    data_props.update({"dateModified": date_modified, "size": size})
+                elif file_path.name.endswith((".zip", ".db")):
+                    data_props.update({"contentSize": stats.st_size, "dateModified": date_modified})
+                else:
+                    rows = 0
+                    with file_path.open("r") as df:
+                        for line in df:
+                            rows += 1
+                    data_props.update({"contentSize": stats.st_size, "dateModified": date_modified, "size": rows})
+
+                # Add/update schema
+                if datafile.get("encodingFormat") == "text/csv":
+                    schema_name = check_schema(file_path)
+                    data_props.update({"conformsTo": {"@id": str(schema_name)}})
+                    schema_props["name"] = f"Frictionless Table Schema for {data_props['name']} dataset"
+                    schema_props["url"] = f"{repo_url.strip('/')}/raw/main/{schema_name}"
+                    crate.add_file(str(schema_name), properties=schema_props)
+
+            # Update CreateAction
+            # action = get_create_action(crate, str(file_path))
+            # action.properties().update({"endDate": date_modified})
+
+        actions = crate.get_by_type("CreateAction")
+        for action in actions:
+            action_dates = []
+            props = action.properties()
+            for result in props["result"]:
+                result_file = crate.dereference(result["@id"])
+                action_dates.append(result_file.properties()["dateModified"])
+            latest_date = sorted(action_dates)[-1]
+            action.properties().update({"endDate": latest_date})
+
+        # Update version
+        if version:
+            crate.update_jsonld(
+                {
+                    "@id": "./",
+                    "version": version,
+                    "datePublished": datetime.datetime.now().strftime("%Y-%m-%d"),
+                }
+            )
+            add_update_action(crate, version)
+        else:
+            crate.update_jsonld(
+                {
+                    "@id": "./",
+                    "datePublished": datetime.datetime.now().strftime("%Y-%m-%d"),
+                }
+            )
+        crate.write("./")
+    finally:
+        os.chdir(original_cwd)
 def main(version):
     os.chdir(Path(__file__).resolve().parent.parent)
     crate = ROCrate("./")
