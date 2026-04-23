@@ -1,0 +1,268 @@
+
+=== PROFILE: /Users/nicky/Projects/CentralLibraryData/periodical-issues.csv ===
+rows: 37015
+columns: 8
+column names and dtypes:
+id                     str
+title_id               str
+title                  str
+description            str
+date                   str
+url                    str
+pages                int64
+text_download_url      str
+
+first 5 rows:
+             id        title_id                                                           title       description       date                                url  pages                                                                            text_download_url
+nla.obj-8447243 nla.obj-8423556 "Coo-ee!" : the journal of the Bishops Knoll Hospital, Bristol. Volume 1 Number 1 1916-11-10 https://nla.gov.au/nla.obj-8447243     48 https://trove.nla.gov.au/nla.obj-8447243/download?downloadOption=ocr&firstPage=0&lastPage=47
+nla.obj-8452230 nla.obj-8423556 "Coo-ee!" : the journal of the Bishops Knoll Hospital, Bristol. Volume 1 Number 2 1916-12-20 https://nla.gov.au/nla.obj-8452230     40 https://trove.nla.gov.au/nla.obj-8452230/download?downloadOption=ocr&firstPage=0&lastPage=39
+nla.obj-8458012 nla.obj-8423556 "Coo-ee!" : the journal of the Bishops Knoll Hospital, Bristol. Volume 1 Number 3 1917-01-19 https://nla.gov.au/nla.obj-8458012     40 https://trove.nla.gov.au/nla.obj-8458012/download?downloadOption=ocr&firstPage=0&lastPage=39
+nla.obj-8465575 nla.obj-8423556 "Coo-ee!" : the journal of the Bishops Knoll Hospital, Bristol. Volume 1 Number 4 1917-02-19 https://nla.gov.au/nla.obj-8465575     40 https://trove.nla.gov.au/nla.obj-8465575/download?downloadOption=ocr&firstPage=0&lastPage=39
+nla.obj-8469716 nla.obj-8423556 "Coo-ee!" : the journal of the Bishops Knoll Hospital, Bristol. Volume 1 Number 5 1917-03-09 https://nla.gov.au/nla.obj-8469716     36 https://trove.nla.gov.au/nla.obj-8469716/download?downloadOption=ocr&firstPage=0&lastPage=35
+
+null report (sorted):
+                   null_count  null_pct
+date                      431  1.164393
+description                16  0.043226
+id                          0  0.000000
+title_id                    0  0.000000
+title                       0  0.000000
+url                         0  0.000000
+pages                       0  0.000000
+text_download_url           0  0.000000
+
+exact duplicate rows: 0
+
+id duplicate rows for title_id: 36793
+duplicate index numbers (title_id, showing up to 200): [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 16, 17, 18, 19, 20, 21, 22, 24, 25, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204]
+             title_id
+1616  nla.obj-1037567
+1611  nla.obj-1037567
+1610  nla.obj-1037567
+1609  nla.obj-1037567
+1608  nla.obj-1037567
+1607  nla.obj-1037567
+1606  nla.obj-1037567
+1605  nla.obj-1037567
+1604  nla.obj-1037567
+1603  nla.obj-1037567
+1602  nla.obj-1037567
+1601  nla.obj-1037567
+1600  nla.obj-1037567
+1599  nla.obj-1037567
+1598  nla.obj-1037567
+1597  nla.obj-1037567
+1596  nla.obj-1037567
+1595  nla.obj-1037567
+1594  nla.obj-1037567
+1593  nla.obj-1037567
+1592  nla.obj-1037567
+1591  nla.obj-1037567
+1612  nla.obj-1037567
+1613  nla.obj-1037567
+1614  nla.obj-1037567
+1615  nla.obj-1037567
+1638  nla.obj-1037567
+1637  nla.obj-1037567
+1636  nla.obj-1037567
+1635  nla.obj-1037567
+1634  nla.obj-1037567
+1633  nla.obj-1037567
+1632  nla.obj-1037567
+1631  nla.obj-1037567
+1630  nla.obj-1037567
+1629  nla.obj-1037567
+1590  nla.obj-1037567
+1628  nla.obj-1037567
+1626  nla.obj-1037567
+1625  nla.obj-1037567
+1624  nla.obj-1037567
+1623  nla.obj-1037567
+1622  nla.obj-1037567
+1621  nla.obj-1037567
+1620  nla.obj-1037567
+1619  nla.obj-1037567
+1618  nla.obj-1037567
+1617  nla.obj-1037567
+1627  nla.obj-1037567
+1639  nla.obj-1037567
+1589  nla.obj-1037567
+1587  nla.obj-1037567
+1560  nla.obj-1037567
+1559  nla.obj-1037567
+1558  nla.obj-1037567
+1557  nla.obj-1037567
+1556  nla.obj-1037567
+1555  nla.obj-1037567
+1554  nla.obj-1037567
+1553  nla.obj-1037567
+1552  nla.obj-1037567
+1551  nla.obj-1037567
+1550  nla.obj-1037567
+1549  nla.obj-1037567
+1548  nla.obj-1037567
+1547  nla.obj-1037567
+1546  nla.obj-1037567
+1545  nla.obj-1037567
+1544  nla.obj-1037567
+1543  nla.obj-1037567
+1542  nla.obj-1037567
+1541  nla.obj-1037567
+1540  nla.obj-1037567
+1561  nla.obj-1037567
+1562  nla.obj-1037567
+1563  nla.obj-1037567
+1564  nla.obj-1037567
+1586  nla.obj-1037567
+1585  nla.obj-1037567
+1584  nla.obj-1037567
+1583  nla.obj-1037567
+1582  nla.obj-1037567
+1581  nla.obj-1037567
+1580  nla.obj-1037567
+1579  nla.obj-1037567
+1578  nla.obj-1037567
+1577  nla.obj-1037567
+1588  nla.obj-1037567
+1576  nla.obj-1037567
+1574  nla.obj-1037567
+1573  nla.obj-1037567
+1572  nla.obj-1037567
+1571  nla.obj-1037567
+1570  nla.obj-1037567
+1569  nla.obj-1037567
+1568  nla.obj-1037567
+1567  nla.obj-1037567
+1566  nla.obj-1037567
+1565  nla.obj-1037567
+1575  nla.obj-1037567
+1640  nla.obj-1037567
+1641  nla.obj-1037567
+1642  nla.obj-1037567
+1711  nla.obj-1037567
+1712  nla.obj-1037567
+1713  nla.obj-1037567
+1714  nla.obj-1037567
+1715  nla.obj-1037567
+1716  nla.obj-1037567
+1717  nla.obj-1037567
+1718  nla.obj-1037567
+1719  nla.obj-1037567
+1720  nla.obj-1037567
+1721  nla.obj-1037567
+1722  nla.obj-1037567
+1723  nla.obj-1037567
+1724  nla.obj-1037567
+1725  nla.obj-1037567
+1726  nla.obj-1037567
+1727  nla.obj-1037567
+1728  nla.obj-1037567
+1729  nla.obj-1037567
+1730  nla.obj-1037567
+1731  nla.obj-1037567
+1710  nla.obj-1037567
+1709  nla.obj-1037567
+1708  nla.obj-1037567
+1707  nla.obj-1037567
+1685  nla.obj-1037567
+1686  nla.obj-1037567
+1687  nla.obj-1037567
+1688  nla.obj-1037567
+1689  nla.obj-1037567
+1690  nla.obj-1037567
+1691  nla.obj-1037567
+1692  nla.obj-1037567
+1693  nla.obj-1037567
+1694  nla.obj-1037567
+1732  nla.obj-1037567
+1695  nla.obj-1037567
+1697  nla.obj-1037567
+1698  nla.obj-1037567
+1699  nla.obj-1037567
+1700  nla.obj-1037567
+1701  nla.obj-1037567
+1702  nla.obj-1037567
+1703  nla.obj-1037567
+1704  nla.obj-1037567
+1705  nla.obj-1037567
+1706  nla.obj-1037567
+1696  nla.obj-1037567
+1733  nla.obj-1037567
+1734  nla.obj-1037567
+1735  nla.obj-1037567
+1664  nla.obj-1037567
+1663  nla.obj-1037567
+1662  nla.obj-1037567
+1661  nla.obj-1037567
+1660  nla.obj-1037567
+1659  nla.obj-1037567
+1658  nla.obj-1037567
+1657  nla.obj-1037567
+1656  nla.obj-1037567
+1655  nla.obj-1037567
+1665  nla.obj-1037567
+1654  nla.obj-1037567
+1652  nla.obj-1037567
+1651  nla.obj-1037567
+1650  nla.obj-1037567
+1649  nla.obj-1037567
+1648  nla.obj-1037567
+1647  nla.obj-1037567
+1646  nla.obj-1037567
+1645  nla.obj-1037567
+1644  nla.obj-1037567
+1643  nla.obj-1037567
+1653  nla.obj-1037567
+1539  nla.obj-1037567
+1666  nla.obj-1037567
+1668  nla.obj-1037567
+1736  nla.obj-1037567
+1737  nla.obj-1037567
+1738  nla.obj-1037567
+1739  nla.obj-1037567
+1740  nla.obj-1037567
+1741  nla.obj-1037567
+1742  nla.obj-1037567
+1743  nla.obj-1037567
+1682  nla.obj-1037567
+1681  nla.obj-1037567
+1667  nla.obj-1037567
+1680  nla.obj-1037567
+1678  nla.obj-1037567
+1677  nla.obj-1037567
+1676  nla.obj-1037567
+1675  nla.obj-1037567
+1674  nla.obj-1037567
+1673  nla.obj-1037567
+1672  nla.obj-1037567
+1671  nla.obj-1037567
+
+numeric column stats:
+pages: min=1 max=3290 mean=51.939808185870596
+non-numeric values in text_download_url: 37015
+                                                                                   text_download_url
+0       https://trove.nla.gov.au/nla.obj-8447243/download?downloadOption=ocr&firstPage=0&lastPage=47
+1       https://trove.nla.gov.au/nla.obj-8452230/download?downloadOption=ocr&firstPage=0&lastPage=39
+2       https://trove.nla.gov.au/nla.obj-8458012/download?downloadOption=ocr&firstPage=0&lastPage=39
+3       https://trove.nla.gov.au/nla.obj-8465575/download?downloadOption=ocr&firstPage=0&lastPage=39
+4       https://trove.nla.gov.au/nla.obj-8469716/download?downloadOption=ocr&firstPage=0&lastPage=35
+5       https://trove.nla.gov.au/nla.obj-8473393/download?downloadOption=ocr&firstPage=0&lastPage=37
+6       https://trove.nla.gov.au/nla.obj-8477277/download?downloadOption=ocr&firstPage=0&lastPage=35
+7       https://trove.nla.gov.au/nla.obj-8480954/download?downloadOption=ocr&firstPage=0&lastPage=37
+8       https://trove.nla.gov.au/nla.obj-9139951/download?downloadOption=ocr&firstPage=0&lastPage=37
+9       https://trove.nla.gov.au/nla.obj-9161241/download?downloadOption=ocr&firstPage=0&lastPage=35
+10     https://trove.nla.gov.au/nla.obj-15922909/download?downloadOption=ocr&firstPage=0&lastPage=37
+11      https://trove.nla.gov.au/nla.obj-9557231/download?downloadOption=ocr&firstPage=0&lastPage=35
+12      https://trove.nla.gov.au/nla.obj-9878439/download?downloadOption=ocr&firstPage=0&lastPage=41
+13  https://trove.nla.gov.au/nla.obj-3041640304/download?downloadOption=ocr&firstPage=0&lastPage=343
+14  https://trove.nla.gov.au/nla.obj-3008849314/download?downloadOption=ocr&firstPage=0&lastPage=159
+15     https://trove.nla.gov.au/nla.obj-15967449/download?downloadOption=ocr&firstPage=0&lastPage=16
+16    https://trove.nla.gov.au/nla.obj-170047078/download?downloadOption=ocr&firstPage=0&lastPage=51
+17    https://trove.nla.gov.au/nla.obj-171920359/download?downloadOption=ocr&firstPage=0&lastPage=50
+18    https://trove.nla.gov.au/nla.obj-181287479/download?downloadOption=ocr&firstPage=0&lastPage=43
+19    https://trove.nla.gov.au/nla.obj-181292335/download?downloadOption=ocr&firstPage=0&lastPage=35
+
+date parsing checks:
+unparseable dates in date: 0
+CLEANED: /Users/nicky/Projects/CentralLibraryData/periodical-issues.csv -> /Users/nicky/Projects/CentralLibraryData/cleaned_data/periodical-issues.csv (dupes=0, nulls=0)
+validation passed: periodical-issues.csv
