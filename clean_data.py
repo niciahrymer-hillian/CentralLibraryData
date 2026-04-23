@@ -609,64 +609,74 @@ def main() -> int:
     failures = 0
     total_duplicates = 0
     total_nulls = 0
+    interrupted = False
+    per_file_summary: list[tuple[str, str, str, int | None, int | None]] = []
     max_file_bytes = None if args.max_file_mb is None else args.max_file_mb * 1024 * 1024
+    files_to_process = sorted(iter_data_files(root))
+    try:
+        for path in files_to_process:
+            report_path: Path | None = None
+            report_stream: TextIO | None = None
+            if max_file_bytes is not None and path.stat().st_size > max_file_bytes:
+                if args.write_reports and _should_write_sidecar_report(path):
+                    report_path = _report_path_for(path, root, args.report_dir)
+                    report_path.parent.mkdir(parents=True, exist_ok=True)
+                    report_stream = report_path.open("w", encoding="utf-8")
+                    _emit(
+                        f"SKIPPED (too large, >{args.max_file_mb}MB): {path}",
+                        report_stream,
+                    )
+                    report_stream.close()
+                else:
+                    print(f"SKIPPED (too large, >{args.max_file_mb}MB): {path}")
+                per_file_summary.append((str(path), "skipped", "", None, None))
+                continue
+            try:
+                if args.write_reports and _should_write_sidecar_report(path):
+                    report_path = _report_path_for(path, root, args.report_dir)
+                    report_path.parent.mkdir(parents=True, exist_ok=True)
+                    report_stream = report_path.open("w", encoding="utf-8")
 
-    for path in sorted(iter_data_files(root)):
-        report_path: Path | None = None
-        report_stream: TextIO | None = None
-        if max_file_bytes is not None and path.stat().st_size > max_file_bytes:
-            if args.write_reports and _should_write_sidecar_report(path):
-                report_path = _report_path_for(path, root, args.report_dir)
-                report_path.parent.mkdir(parents=True, exist_ok=True)
-                report_stream = report_path.open("w", encoding="utf-8")
-                _emit(
-                    f"SKIPPED (too large, >{args.max_file_mb}MB): {path}",
-                    report_stream,
-                )
-                report_stream.close()
-            else:
-                print(f"SKIPPED (too large, >{args.max_file_mb}MB): {path}")
-            continue
-        try:
-            if args.write_reports and _should_write_sidecar_report(path):
-                report_path = _report_path_for(path, root, args.report_dir)
-                report_path.parent.mkdir(parents=True, exist_ok=True)
-                report_stream = report_path.open("w", encoding="utf-8")
+                if path.suffix.lower() == ".csv" and (args.profile_csv or args.validate_csv):
+                    df_before = pd.read_csv(path, low_memory=False, on_bad_lines='warn')
+                    if args.profile_csv:
+                        _print_csv_profile(path, df_before, report_stream=report_stream)
 
-            if path.suffix.lower() == ".csv" and (args.profile_csv or args.validate_csv):
-                df_before = pd.read_csv(path, low_memory=False, on_bad_lines='warn')
-                if args.profile_csv:
-                    _print_csv_profile(path, df_before, report_stream=report_stream)
-
-            cleaned, dupes, nulls = clean_file(path, trim_fields=args.trim_fields)
-            original = path.read_text(encoding="utf-8-sig")
-            if cleaned == original and dupes == 0 and nulls == 0:
-                unchanged += 1
-                if report_stream is not None:
+                cleaned, dupes, nulls = clean_file(path, trim_fields=args.trim_fields)
+                original = path.read_text(encoding="utf-8-sig")
+                if cleaned == original and dupes == 0 and nulls == 0:
+                    unchanged += 1
                     _emit(f"UNCHANGED: {path}", report_stream)
-                continue
-            changed += 1
-            total_duplicates += dupes
-            total_nulls += nulls
-            if args.dry_run:
-                _emit(f"WOULD CLEAN: {path} (dupes={dupes}, nulls={nulls})", report_stream)
+                    per_file_summary.append((str(path), "unchanged", str(path), 0, 0))
+                    continue
+                changed += 1
+                total_duplicates += dupes
+                total_nulls += nulls
+                if args.dry_run:
+                    _emit(f"WOULD CLEAN: {path} (dupes={dupes}, nulls={nulls})", report_stream)
+                    if path.suffix.lower() == ".csv" and args.validate_csv:
+                        validated_df = _clean_csv_dataframe(df_before)
+                        _validate_cleaned_csv(validated_df, path.name, report_stream=report_stream)
+                    per_file_summary.append((str(path), "would_clean", str(path), dupes, nulls))
+                    continue
+                target = write_output(cleaned, path, root, output_dir, args.in_place)
+                _emit(f"CLEANED: {path} -> {target} (dupes={dupes}, nulls={nulls})", report_stream)
                 if path.suffix.lower() == ".csv" and args.validate_csv:
-                    validated_df = _clean_csv_dataframe(df_before)
-                    _validate_cleaned_csv(validated_df, path.name, report_stream=report_stream)
-                continue
-            target = write_output(cleaned, path, root, output_dir, args.in_place)
-            _emit(f"CLEANED: {path} -> {target} (dupes={dupes}, nulls={nulls})", report_stream)
-            if path.suffix.lower() == ".csv" and args.validate_csv:
-                validated_df = _clean_csv_dataframe(pd.read_csv(target, low_memory=False, on_bad_lines='warn'))
-                _validate_cleaned_csv(validated_df, target.name, report_stream=report_stream)
-            elif report_stream is not None:
-                _print_non_csv_report(path, target, changed=True, dupes=dupes, nulls=nulls, report_stream=report_stream)
-        except Exception as exc:  # pragma: no cover - defensive path for malformed files
-            failures += 1
-            _emit(f"FAILED: {path} ({exc})", report_stream)
-        finally:
-            if report_stream is not None:
-                report_stream.close()
+                    validated_df = _clean_csv_dataframe(pd.read_csv(target, low_memory=False, on_bad_lines='warn'))
+                    _validate_cleaned_csv(validated_df, target.name, report_stream=report_stream)
+                elif report_stream is not None:
+                    _print_non_csv_report(path, target, changed=True, dupes=dupes, nulls=nulls, report_stream=report_stream)
+                per_file_summary.append((str(path), "cleaned", str(target), dupes, nulls))
+            except Exception as exc:  # pragma: no cover - defensive path for malformed files
+                failures += 1
+                _emit(f"FAILED: {path} ({exc})", report_stream)
+                per_file_summary.append((str(path), "failed", "", None, None))
+            finally:
+                if report_stream is not None:
+                    report_stream.close()
+    except KeyboardInterrupt:
+        interrupted = True
+        print("\nInterrupted by user. Printing partial summary...")
 
     mode = "in-place" if args.in_place else f"output-dir={output_dir}"
     print("\nSummary")
@@ -676,7 +686,35 @@ def main() -> int:
     print(f"duplicates removed: {total_duplicates}")
     print(f"null rows removed: {total_nulls}")
     print(f"failed: {failures}")
+    print(f"interrupted: {interrupted}")
 
+    if per_file_summary:
+        print("\nPer-file summary")
+        for file_path, status, output_path, dupes, nulls in per_file_summary:
+            output_display = output_path if output_path else "-"
+            if status == "cleaned":
+                print(
+                    f"CLEANED: {file_path} -> {output_display} "
+                    f"(duplicates_removed={dupes}, null_rows_removed={nulls})"
+                )
+            elif status == "would_clean":
+                print(
+                    f"WOULD_CLEAN: {file_path} -> {output_display} "
+                    f"(duplicates_removed={dupes}, null_rows_removed={nulls})"
+                )
+            elif status == "unchanged":
+                print(
+                    f"UNCHANGED: {file_path} -> {output_display} "
+                    "(duplicates_removed=0, null_rows_removed=0)"
+                )
+            else:
+                print(
+                    f"{status.upper()}: {file_path} -> {output_display} "
+                    "(duplicates_removed=n/a, null_rows_removed=n/a)"
+                )
+
+    if interrupted:
+        return 130
     return 1 if failures else 0
 
 
