@@ -46,3 +46,29 @@ https://github.com/ZCW-Summer25/PipelineOne
 https://github.com/ZCW-Summer25/PipelineTwo
 https://github.com/ZCW-Summer25/PipelineThree
 https://github.com/ZCW-Summer25/PipelineFour
+
+## Run Commands
+
+Clean data into `cleaned_data/`:
+
+```bash
+python clean_data.py --trim-fields --validate-csv --write-reports
+```
+
+Run Java export pipeline using project data:
+
+```bash
+python export_java_class_data.py
+```
+
+Run Java export pipeline against sample data:
+
+```bash
+python export_java_class_data.py --sample --sample-group valid_records
+```
+
+Run tests:
+
+```bash
+pytest -q
+```
