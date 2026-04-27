@@ -128,6 +128,10 @@ HATE_PATTERNS = [
 
 HARMFUL_MUSIC_PATTERNS = [*PROFANITY_PATTERNS, *HATE_PATTERNS]
 
+PERIODICAL_TITLE_REPLACEMENTS = [
+    (re.compile(r"\blesbians?\s+on\s+the\s+loose\b", flags=re.IGNORECASE), "Community Life Review"),
+]
+
 TITLE_QUALIFIER_FIRST = [
     "North", "South", "East", "West", "Harbor", "River", "Civic", "Metro", "Central", "Summit",
     "Coastal", "Valley", "Forest", "Lake", "Prairie", "Granite", "Crown", "Elm", "Pine", "Maple",
@@ -310,6 +314,33 @@ def enforce_periodical_title_uniqueness(frame: pd.DataFrame) -> pd.DataFrame:
     return result
 
 
+def sanitize_periodical_titles(frame: pd.DataFrame) -> pd.DataFrame:
+    if "Title" not in frame.columns:
+        return frame
+
+    result = frame.copy()
+    id_column = resolve_id_column(result)
+
+    for idx in result.index:
+        current_title = str(result.at[idx, "Title"]).strip()
+        if not current_title:
+            continue
+
+        replacement = None
+        for pattern, replacement_base in PERIODICAL_TITLE_REPLACEMENTS:
+            if pattern.search(current_title):
+                replacement = replacement_base
+                break
+
+        if replacement is not None:
+            id_token = normalize_id_token(result.at[idx, id_column], int(idx) + 1)
+            chooser = stable_rng("Periodical", "replacement-title", int(idx), id_token)
+            variant = chooser.choice(["Digest", "Review", "Journal", "Chronicle"])
+            result.at[idx, "Title"] = f"{replacement} {variant}"
+
+    return result
+
+
 def contains_harmful_music_text(text: str) -> bool:
     lowered = text.lower()
     for pattern in HARMFUL_MUSIC_PATTERNS:
@@ -463,6 +494,7 @@ def main() -> None:
         frame = pd.read_csv(source_path, dtype="string")
         output = fill_missing_values(class_name, frame)
         if class_name == "Periodical":
+            output = sanitize_periodical_titles(output)
             output = enforce_periodical_title_uniqueness(output)
         if class_name == "Music":
             output = sanitize_music_content(output)
