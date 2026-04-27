@@ -1,0 +1,25 @@
+
+=== PROFILE: /Users/nicky/Projects/CentralLibraryData/links_small.csv ===
+rows: 9125
+columns: 3
+column names and dtypes:
+movieId      int64
+imdbId       int64
+tmdbId     float64
+
+first 5 rows:
+ movieId  imdbId  tmdbId
+       1  114709   862.0
+       2  113497  8844.0
+       3  113228 15602.0
+       4  114885 31357.0
+       5  113041 11862.0
+
+null report (sorted):
+         null_count  null_pct
+tmdbId           13  0.142466
+movieId           0  0.000000
+imdbId            0  0.000000
+
+exact duplicate rows: 0
+UNCHANGED: /Users/nicky/Projects/CentralLibraryData/links_small.csv
